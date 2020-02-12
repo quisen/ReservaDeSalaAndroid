@@ -24,6 +24,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
@@ -50,17 +53,54 @@ public class MainActivity extends AppCompatActivity {
 				usuario = usuarioTextInputLayout.getEditText().getText().toString();
 				senha = senhaTextInputLayout.getEditText().getText().toString();
 				System.out.println("usuario: "+usuario + " - " + "senha: " + senha);
-//				login();
 
-				Map<String, String> params = new HashMap<String, String>();
-				params.put("authorization", "secret");
-				params.put("email", usuario);
-				params.put("password", senha);
-				String url = "http://172.30.248.56:8080/ReservaDeSala/rest/usuario/login";
-				login();
+//				Map<String, String> params = new HashMap<String, String>();
+//				params.put("authorization", "secret");
+//				params.put("email", usuario);
+//				params.put("password", senha);
+//				String url = "http://172.30.248.56:8080/ReservaDeSala/rest/usuario/login";
+				try {
+					Map<String, String> params = new HashMap<String, String>();
+					params.put("authorization", "secret");
+					params.put("email", usuario);
+					params.put("password", senha);
+					String url = "http://172.30.248.56:8080/ReservaDeSala/rest/usuario/login";
+
+					loadingProgressBar.setVisibility(View.VISIBLE);
+					new HttpRequest(
+							getApplicationContext(),
+							params,
+							url,
+							"GET").doRequest();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				loadingProgressBar.setVisibility(View.VISIBLE);
 			}
 		});
+	}
+
+	public void onStart() {
+		super.onStart();
+		EventBus.getDefault().register(this);
+	}
+	public void onStop(){
+		super.onStop();
+		EventBus.getDefault().unregister(this);
+	}
+
+	@Subscribe
+	public void customEventReceived(Event event){
+		if (event.getEventName().equals("LoginSucesso")) {
+			showToastLogin("Login Sucesso ! Redirecionar para Tela Princial (" + event.getEventMsg() + ")");
+		} else if (event.getEventName().equals("LoginErro")) {
+			showToastLogin("Erro ao fazer login ! (" + event.getEventMsg() + ")");
+		}
+	}
+
+	public void showToastLogin(String msg) {
+		Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+		loadingProgressBar.setVisibility(View.GONE);
 	}
 
 	public void login() {
