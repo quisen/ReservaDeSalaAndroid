@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 				params.put("password", senha);
 				String url = "http://172.30.248.56:8080/ReservaDeSala/rest/usuario/login";
 				login();
-				loadingProgressBar.setVisibility(View.GONE);
+				loadingProgressBar.setVisibility(View.VISIBLE);
 			}
 		});
 	}
@@ -70,29 +70,22 @@ public class MainActivity extends AppCompatActivity {
 						@Override
 						public void onResponse(String response) {
 							System.out.println("Response Login: " + response);
-
+							Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
 							loadingProgressBar.setVisibility(View.GONE);
 						}
 					},
 					new Response.ErrorListener() {
 						@Override
 						public void onErrorResponse(VolleyError error) {
-							if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-								System.out.println("Response TimeoutError: " + error.toString());
-							} else if (error instanceof AuthFailureError) {
-								try {
-									System.out.println("Response AuthFailureError: " + new String(error.networkResponse.data, "UTF-8"));
-								} catch (UnsupportedEncodingException e) {
-									e.printStackTrace();
-								}
-							} else if (error instanceof ServerError) {
-								System.out.println("Response ServerError: " + error.toString());
-							} else if (error instanceof NetworkError) {
-								System.out.println("Response NetworkError: " + error.toString());
-							} else if (error instanceof ParseError) {
-								System.out.println("Response ParseError: " + error.toString());
+							try {
+								String errorResult = new String(error.networkResponse.data, "UTF-8");
+								Toast.makeText(getApplicationContext(), errorResult, Toast.LENGTH_SHORT).show();
+								System.out.println("Response Error: " + errorResult);
+								loadingProgressBar.setVisibility(View.GONE);
+							} catch (Exception e) {
+								e.printStackTrace();
+								loadingProgressBar.setVisibility(View.GONE);
 							}
-							loadingProgressBar.setVisibility(View.GONE);
 						}
 					}) {
 				@Override
