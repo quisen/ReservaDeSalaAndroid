@@ -8,10 +8,12 @@
     android:padding="10dp"
     tools:context=".MainActivity">
 
+    <!--https://lottiefiles.com/featured-->
+    <!--https://medium.com/acmvit/getting-started-with-lottie-animations-android-2c225ad2c467-->
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lav_actionBar"
         android:layout_width="match_parent"
-        android:layout_height="230dp"
+        android:layout_height="250dp"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
@@ -56,17 +58,34 @@
 
     <ProgressBar
         android:id="@+id/loading"
+        style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="23dp"
+        android:layout_marginTop="20dp"
+        android:indeterminate="false"
         android:layout_gravity="center"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="64dp"
+        android:elevation="10dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/et_senha"
-        app:layout_constraintStart_toStartOf="@+id/et_senha"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3" />
+        android:max="100"
+        android:minHeight="50dp"
+        android:minWidth="200dp"
+        android:progress="1" />
+
+
+    <!--<ProgressBar-->
+        <!--android:id="@+id/loading"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_marginStart="32dp"-->
+        <!--android:layout_marginTop="64dp"-->
+        <!--android:layout_marginEnd="32dp"-->
+        <!--android:layout_marginBottom="64dp"-->
+        <!--android:visibility="gone"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="@+id/et_senha"-->
+        <!--app:layout_constraintStart_toStartOf="@+id/et_senha"-->
+        <!--app:layout_constraintTop_toTopOf="parent"-->
+        <!--app:layout_constraintVertical_bias="0.3" />-->
 </androidx.appcompat.widget.LinearLayoutCompat>

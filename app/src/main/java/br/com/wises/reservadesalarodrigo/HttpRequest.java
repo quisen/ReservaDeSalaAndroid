@@ -47,7 +47,7 @@ public class HttpRequest {
 					new Response.Listener<String>() {
 						@Override
 						public void onResponse(String response) {
-							EventBus.getDefault().post(new Event("LoginSucesso", response));
+							EventBus.getDefault().post(new Event("RequestSuccess", response));
 						}
 					},
 					new Response.ErrorListener() {
@@ -55,7 +55,7 @@ public class HttpRequest {
 						public void onErrorResponse(VolleyError error) {
 							try {
 								String errorResult = new String(error.networkResponse.data, "UTF-8");
-								EventBus.getDefault().post(new Event("LoginErro", errorResult));
+								EventBus.getDefault().post(new Event("RequestError", errorResult));
 							} catch (Exception e) {
 								e.printStackTrace();
 							}

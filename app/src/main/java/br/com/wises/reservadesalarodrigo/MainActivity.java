@@ -33,6 +33,7 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 	ProgressBar loadingProgressBar;
+	MaterialButton loginButton;
 	String usuario = "";
 	String senha = "";
 
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
 		final TextInputLayout usuarioTextInputLayout = findViewById(R.id.et_usuario);
 		final TextInputLayout senhaTextInputLayout = findViewById(R.id.et_senha);
-		final MaterialButton loginButton = findViewById(R.id.login);
+		loginButton = findViewById(R.id.login);
 		loadingProgressBar = findViewById(R.id.loading);
 
 		loginButton.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
 					params.put("password", senha);
 					String url = "http://172.30.248.56:8080/ReservaDeSala/rest/usuario/login";
 
+					loginButton.setEnabled(false);
 					loadingProgressBar.setVisibility(View.VISIBLE);
 					new HttpRequest(
 							getApplicationContext(),
@@ -90,11 +92,13 @@ public class MainActivity extends AppCompatActivity {
 
 	@Subscribe
 	public void customEventReceived(Event event){
-		if (event.getEventName().equals("LoginSucesso")) {
+		if (event.getEventName().equals("RequestSuccess")) {
 			showToastLogin("Login Sucesso ! Redirecionar para Tela Princial (" + event.getEventMsg() + ")");
-		} else if (event.getEventName().equals("LoginErro")) {
+		} else if (event.getEventName().equals("RequestError")) {
 			showToastLogin("Erro ao fazer login ! (" + event.getEventMsg() + ")");
 		}
+		loadingProgressBar.setVisibility(View.GONE);
+		loginButton.setEnabled(true);
 	}
 
 	public void showToastLogin(String msg) {
