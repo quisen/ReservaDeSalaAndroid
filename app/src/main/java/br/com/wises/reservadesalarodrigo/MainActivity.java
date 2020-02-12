@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 		loginButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				loadingProgressBar.setVisibility(View.VISIBLE);
+//				loadingProgressBar.setVisibility(View.VISIBLE);
 				usuario = usuarioTextInputLayout.getEditText().getText().toString();
 				senha = senhaTextInputLayout.getEditText().getText().toString();
 				System.out.println("usuario: "+usuario + " - " + "senha: " + senha);
@@ -75,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				loadingProgressBar.setVisibility(View.VISIBLE);
 			}
 		});
 	}
