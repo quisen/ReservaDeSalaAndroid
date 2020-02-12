@@ -21,6 +21,8 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
@@ -36,17 +38,18 @@ public class MainActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		final EditText usuarioEditText = findViewById(R.id.et_usuario);
-		final EditText senhaEditText = findViewById(R.id.et_senha);
-		final Button loginButton = findViewById(R.id.login);
+		final TextInputLayout usuarioTextInputLayout = findViewById(R.id.et_usuario);
+		final TextInputLayout senhaTextInputLayout = findViewById(R.id.et_senha);
+		final MaterialButton loginButton = findViewById(R.id.login);
 		loadingProgressBar = findViewById(R.id.loading);
 
 		loginButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				loadingProgressBar.setVisibility(View.VISIBLE);
-				usuario = usuarioEditText.getText().toString();
-				senha = senhaEditText.getText().toString();
+				usuario = usuarioTextInputLayout.getEditText().getText().toString();
+				senha = senhaTextInputLayout.getEditText().getText().toString();
+				System.out.println("usuario: "+usuario + " - " + "senha: " + senha);
 //				login();
 
 				Map<String, String> params = new HashMap<String, String>();
