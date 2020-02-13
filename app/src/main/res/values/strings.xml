@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ReservaDeSalaRodrigo</string>
+    <string name="app_name">Reserva de Salas - Wise</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Senha</string>
     <string name="action_sign_in">Login ou Registrar</string>
