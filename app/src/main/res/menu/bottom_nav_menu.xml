@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_reservas"
+        android:icon="@drawable/ic_calendar"
+        android:title="Reservas" />
+
+    <item
+        android:id="@+id/navigation_salas"
+        android:icon="@drawable/ic_location"
+        android:title="Salas" />
+
+    <item
+        android:id="@+id/navigation_configuracoes"
+        android:icon="@drawable/ic_settings"
+        android:title="Configurações" />
+
+</menu>

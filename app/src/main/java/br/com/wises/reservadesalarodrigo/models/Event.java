@@ -1,4 +1,4 @@
-package br.com.wises.reservadesalarodrigo;
+package br.com.wises.reservadesalarodrigo.models;
 
 public class Event {
 	String eventName;

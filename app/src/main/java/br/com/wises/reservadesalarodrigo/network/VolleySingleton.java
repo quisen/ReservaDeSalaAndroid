@@ -1,4 +1,4 @@
-package br.com.wises.reservadesalarodrigo;
+package br.com.wises.reservadesalarodrigo.network;
 
 import android.content.Context;
 
