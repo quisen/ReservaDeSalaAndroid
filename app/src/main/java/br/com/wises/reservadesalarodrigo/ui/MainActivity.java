@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 	ProgressBar loadingProgressBar;
 	TextInputLayout usuarioTextInputLayout;
 	TextInputLayout senhaTextInputLayout;
-	MaterialButton loginButton, registerButton;
+	MaterialButton loginButton, cadastrarButton;
 	String usuario = "";
 	String senha = "";
 	long millis = 0L;
@@ -52,10 +53,17 @@ public class MainActivity extends AppCompatActivity {
 			usuarioTextInputLayout.getEditText().setText(userEmail);
 		}
 		loginButton = findViewById(R.id.login);
-		registerButton = findViewById(R.id.register);
+		cadastrarButton = findViewById(R.id.bt_cadastrar);
 		loadingProgressBar = findViewById(R.id.loading);
 		lottieLoading = findViewById(R.id.loadingLottie);
 		calendarLottie = findViewById(R.id.calendarLottie);
+		cadastrarButton.setOnClickListener(new View.OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getApplicationContext(), Cadastro.class);
+				startActivity(intent);
+			}
+		});
 		loginButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -85,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 						loginButton.setVisibility(View.GONE);
 						usuarioTextInputLayout.setVisibility(View.GONE);
 						senhaTextInputLayout.setVisibility(View.GONE);
-						registerButton.setVisibility(View.GONE);
+						cadastrarButton.setVisibility(View.GONE);
 						new HttpRequest(
 								getApplicationContext(),
 								params,
@@ -119,8 +127,8 @@ public class MainActivity extends AppCompatActivity {
 			finish();
 
 		} else if (event.getEventName().equals("Login" + Constants.eventErrorLabel)) {
-//            showToastLogin("Erro ao fazer login ! (" + event.getEventMsg() + ")");
 			Snackbar snackbar = Snackbar.make(loginButton, "Erro ao realizar login", Snackbar.LENGTH_LONG);
+			snackbar.getView().getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
 			snackbar.show();
 		}
 
@@ -128,16 +136,14 @@ public class MainActivity extends AppCompatActivity {
 		lottieLoading.setVisibility(View.GONE);
 		usuarioTextInputLayout.setVisibility(View.VISIBLE);
 		senhaTextInputLayout.setVisibility(View.VISIBLE);
-		registerButton.setVisibility(View.VISIBLE);
+		cadastrarButton.setVisibility(View.VISIBLE);
 		loginButton.setVisibility(View.VISIBLE);
 		loginButton.setEnabled(true);
 		calendarLottie.setVisibility(View.VISIBLE);
 	}
 
-	public void showToastLogin(String msg) {
+	public void showToast(String msg) {
 		Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
-		loadingProgressBar.setVisibility(View.GONE);
-
 	}
 
 	private void closeKeyBoard() {

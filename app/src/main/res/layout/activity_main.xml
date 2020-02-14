@@ -2,6 +2,7 @@
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_layout_id"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -78,7 +79,7 @@
         app:cornerRadius="8dp" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/register"
+        android:id="@+id/bt_cadastrar"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

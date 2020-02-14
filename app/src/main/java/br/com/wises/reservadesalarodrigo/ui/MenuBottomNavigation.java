@@ -12,9 +12,9 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.MenuItem;
 
 import br.com.wises.reservadesalarodrigo.R;
-import br.com.wises.reservadesalarodrigo.configuracao.ConfiguracoesFragment;
-import br.com.wises.reservadesalarodrigo.reserva.ReservasFragment;
-import br.com.wises.reservadesalarodrigo.sala.SalasFragment;
+import br.com.wises.reservadesalarodrigo.ui.configuracao.ConfiguracoesFragment;
+import br.com.wises.reservadesalarodrigo.ui.reserva.ReservasFragment;
+import br.com.wises.reservadesalarodrigo.ui.sala.SalasFragment;
 
 public class MenuBottomNavigation extends AppCompatActivity {
 	static long millis = 0L;

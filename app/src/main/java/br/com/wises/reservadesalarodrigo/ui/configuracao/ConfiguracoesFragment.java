@@ -1,4 +1,4 @@
-package br.com.wises.reservadesalarodrigo.configuracao;
+package br.com.wises.reservadesalarodrigo.ui.configuracao;
 
 import android.content.Intent;
 import android.os.Bundle;
