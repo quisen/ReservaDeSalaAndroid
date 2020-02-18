@@ -48,7 +48,7 @@ public class HttpRequest {
 	public void doRequest() {
 		try {
 			// Formulate the request and handle the response.
-			StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+			StringRequest stringRequest = new StringRequest(reqMethod, url,
 					new Response.Listener<String>() {
 						@Override
 						public void onResponse(String response) {

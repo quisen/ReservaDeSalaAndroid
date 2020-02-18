@@ -74,13 +74,17 @@
 
     <Spinner
         android:id="@+id/sp_empresas"
-        android:visibility="invisible"
+        android:visibility="gone"
         android:imeOptions="actionNext"
+        android:background="@drawable/spinner_background"
+        android:popupElevation="3dp"
+        android:layout_marginBottom="8dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="50dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/bt_cadastrar"
+        android:enabled="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"

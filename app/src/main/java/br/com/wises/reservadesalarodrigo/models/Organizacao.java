@@ -2,11 +2,20 @@ package br.com.wises.reservadesalarodrigo.models;
 
 public class Organizacao {
 
+	int id;
 	String nome;
 	int id_organizacao_pai;
 	char tipo_dominio;
 
 	public Organizacao() {
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getNome() {
