@@ -77,10 +77,12 @@
         android:visibility="gone"
         android:imeOptions="actionNext"
         android:background="@drawable/spinner_background"
+        android:theme="@style/customSpinnerDialog"
         android:popupElevation="3dp"
+        android:spinnerMode="dropdown"
         android:layout_marginBottom="8dp"
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="55dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/bt_cadastrar"

@@ -145,6 +145,9 @@ public class Cadastro extends AppCompatActivity {
 		empresasSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+				if(position == 0){
+					cadastrarButton.setEnabled(false);
+				}
 				if (position > 0) {
 					idOrganizacao = organizacoes.get(position - 1).getId();
 					cadastrarButton.setEnabled(true);
@@ -154,7 +157,7 @@ public class Cadastro extends AppCompatActivity {
 
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
-				((TextView) empresasSpinner.getSelectedView()).setError("Selecione uma organização.");
+				cadastrarButton.setEnabled(false);
 			}
 		});
 	}
