@@ -99,13 +99,13 @@ public class Cadastro extends AppCompatActivity {
 				emailCompleto = emailTextInput.getEditText().getText().toString();
 				senha = senhaTextInput.getEditText().getText().toString();
 				if (nome.isEmpty()) {
-					nomeTextInput.setError("Digite um nome");
+					nomeTextInput.setError("Digite um nome.");
 				} else if (emailCompleto.isEmpty()) {
-					emailTextInput.setError("Digite um email");
+					emailTextInput.setError("Digite um email.");
 					nomeTextInput.setErrorEnabled(false);
 				} else if (senha.isEmpty()) {
 					emailTextInput.setErrorEnabled(false);
-					senhaTextInput.setError("Digite uma senha");
+					senhaTextInput.setError("Digite uma senha.");
 				} else {
 					nomeTextInput.setErrorEnabled(false);
 					emailTextInput.setErrorEnabled(false);
@@ -154,7 +154,7 @@ public class Cadastro extends AppCompatActivity {
 
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
-				((TextView) empresasSpinner.getSelectedView()).setError("Selecione uma organização");
+				((TextView) empresasSpinner.getSelectedView()).setError("Selecione uma organização.");
 			}
 		});
 	}
@@ -244,7 +244,7 @@ public class Cadastro extends AppCompatActivity {
 			}
 
 		} else if (event.getEventName().equals("OrganizacoesByDominio" + Constants.eventErrorLabel)) {
-			emailTextInput.setError("Não foi possível realizar o request das organizações");
+			emailTextInput.setError("Não foi possível verificar o domínio. Verifique sua conexão com a internet.");
 			empresasSpinner.setVisibility(View.GONE);
 			cadastrarButton.setEnabled(false);
 		}
@@ -254,14 +254,14 @@ public class Cadastro extends AppCompatActivity {
 			String response = event.getEventMsg();
 
 			if(response.contains("O email informado já está cadastrado")){
-				emailTextInput.setError("O email informado já está cadastrado");
+				emailTextInput.setError("O email informado já está cadastrado.");
 			}
 			if(response.contains("Usuário criado com sucesso")){
 				Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 				startActivity(intent);
 			}
 			showUIForms();
-		} else if (event.getEventName().equals("OrganizacoesByDominio" + Constants.eventErrorLabel)) {
+		} else if (event.getEventName().equals("CadastrarUsuario" + Constants.eventErrorLabel)) {
 			String response = event.getEventMsg();
 			System.out.println("CadastrarUsuario" + Constants.eventErrorLabel + " - " + response);
 			showUIForms();
