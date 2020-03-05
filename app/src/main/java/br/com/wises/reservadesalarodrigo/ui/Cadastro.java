@@ -189,7 +189,8 @@ public class Cadastro extends AppCompatActivity {
 
 	private void showUIForms(){
 		cadastrarButton.setVisibility(View.VISIBLE);
-		empresasSpinner.setVisibility(View.VISIBLE);
+		if (organizacoes.size() > 1)
+			empresasSpinner.setVisibility(View.VISIBLE);
 		nomeTextInput.setVisibility(View.VISIBLE);
 		senhaTextInput.setVisibility(View.VISIBLE);
 		emailTextInput.setVisibility(View.VISIBLE);
@@ -226,6 +227,7 @@ public class Cadastro extends AppCompatActivity {
 				if (organizacoes.size() == 1) {
 					idOrganizacao = organizacoes.get(0).getId();
 					cadastrarButton.setEnabled(true);
+					empresasSpinner.setVisibility(View.GONE);
 					return;
 				} else {
 					for (int i = 0; i < organizacoes.size(); i++) {
