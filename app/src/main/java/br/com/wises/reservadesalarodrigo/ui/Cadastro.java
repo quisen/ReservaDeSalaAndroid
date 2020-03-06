@@ -67,29 +67,31 @@ public class Cadastro extends AppCompatActivity {
 		emailTextInput.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
 																  @Override
 																  public void onFocusChange(View v, boolean hasFocus) {
-																	  String dominio = "";
-																	  if (!hasFocus && emailTextInput.getEditText().getTextSize() > 0) {
-																		  emailTextInput.setErrorEnabled(false);
-																		  // fazer request para puxar as organizacoes com o email digitado
-																		  emailCompleto = emailTextInput.getEditText().getText().toString();
-																		  if (emailCompleto.contains("@")) {
-																			  dominio = emailCompleto.split("@")[1];
-																			  Map<String, String> params = new HashMap<String, String>();
-																			  params.put("authorization", "secret");
-																			  params.put("dominio", dominio);
-																			  String url = "http://172.30.248.56:8080/ReservaDeSala/rest/organizacao/organizacoesByDominio";
-																			  new HttpRequest(
-																					  getApplicationContext(),
-																					  params,
-																					  url,
-																					  "GET", "OrganizacoesByDominio").doRequest();
-																		  } else {
-																			  emailTextInput.setError("Digite um email válido");
-																		  }
+				  String dominio = "";
+				  if (!hasFocus && emailTextInput.getEditText().getTextSize() > 0) {
+					  emailTextInput.setErrorEnabled(false);
+					  // fazer request para puxar as organizacoes com o email digitado
+					  emailCompleto = emailTextInput.getEditText().getText().toString();
+					  if (emailCompleto.contains("@")) {
+						  dominio = emailCompleto.split("@")[1];
+						  Map<String, String> params = new HashMap<String, String>();
+						  params.put("authorization", "secret");
+						  params.put("dominio", dominio);
+						  String url = "organizacao/organizacoesByDominio";
+						  new HttpRequest(
+								  getApplicationContext(),
+								  params,
+								  url,
+								  "GET", "OrganizacoesByDominio").doRequest();
+					  } else {
+						  emailTextInput.setError("Digite um email válido");
+					  }
 
-																	  }
-																  }
-															  }
+				  } else {
+					  cadastrarButton.setEnabled(false);
+				  }
+			  }
+		  }
 		);
 
 		cadastrarButton.setOnClickListener(new View.OnClickListener() {
@@ -129,7 +131,7 @@ public class Cadastro extends AppCompatActivity {
 					Map<String, String> params = new HashMap<String, String>();
 					params.put("authorization", "secret");
 					params.put("novoUsuario", novoUsuarioEncoded);
-					String url = "http://172.30.248.56:8080/ReservaDeSala/rest/usuario/cadastro";
+					String url = "usuario/cadastro";
 					new HttpRequest(
 							getApplicationContext(),
 							params,
@@ -145,7 +147,7 @@ public class Cadastro extends AppCompatActivity {
 		empresasSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-				if(position == 0){
+				if (position == 0) {
 					cadastrarButton.setEnabled(false);
 				}
 				if (position > 0) {
@@ -178,7 +180,7 @@ public class Cadastro extends AppCompatActivity {
 		EventBus.getDefault().unregister(this);
 	}
 
-	private void hideUIForms(){
+	private void hideUIForms() {
 		cadastrarButton.setVisibility(View.GONE);
 		empresasSpinner.setVisibility(View.GONE);
 		nomeTextInput.setVisibility(View.GONE);
@@ -187,7 +189,7 @@ public class Cadastro extends AppCompatActivity {
 		lottieLoading.setVisibility(View.VISIBLE);
 	}
 
-	private void showUIForms(){
+	private void showUIForms() {
 		cadastrarButton.setVisibility(View.VISIBLE);
 		if (organizacoes.size() > 1)
 			empresasSpinner.setVisibility(View.VISIBLE);
@@ -219,7 +221,7 @@ public class Cadastro extends AppCompatActivity {
 			nomesOrganizacoes.clear();
 			nomesOrganizacoes.add("- Selecione uma organização -");
 
-			if (nomesOrganizacoes.size()>0) {
+			if (nomesOrganizacoes.size() > 0) {
 				organizacoes.clear();
 				organizacoes = gson.fromJson(organizacoesJson, new TypeToken<List<Organizacao>>() {
 				}.getType());
@@ -258,10 +260,10 @@ public class Cadastro extends AppCompatActivity {
 		if (event.getEventName().equals("CadastrarUsuario" + Constants.eventSuccessLabel)) {
 			String response = event.getEventMsg();
 
-			if(response.contains("O email informado já está cadastrado")){
+			if (response.contains("O email informado já está cadastrado")) {
 				emailTextInput.setError("O email informado já está cadastrado.");
 			}
-			if(response.contains("Usuário criado com sucesso")){
+			if (response.contains("Usuário criado com sucesso")) {
 				Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 				startActivity(intent);
 			}

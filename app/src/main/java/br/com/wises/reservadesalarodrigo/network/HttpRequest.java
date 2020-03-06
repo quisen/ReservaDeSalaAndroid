@@ -24,6 +24,8 @@ public class HttpRequest {
 	int reqMethod;
 	String eventName;
 
+	String ip = "http://172.30.248.56:8080/ReservaDeSala/rest/";
+
 	public HttpRequest(Context c, Map<String, String> h, String u, String reqMethod, String eventName) {
 		this.context = c;
 		this.headers = h;
@@ -48,7 +50,7 @@ public class HttpRequest {
 	public void doRequest() {
 		try {
 			// Formulate the request and handle the response.
-			StringRequest stringRequest = new StringRequest(reqMethod, url,
+			StringRequest stringRequest = new StringRequest(reqMethod, ip+url,
 					new Response.Listener<String>() {
 						@Override
 						public void onResponse(String response) {

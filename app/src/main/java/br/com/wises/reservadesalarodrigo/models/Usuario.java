@@ -3,7 +3,10 @@ package br.com.wises.reservadesalarodrigo.models;
 public class Usuario {
 
 	String nome, email, senha;
-	int idOrganizacao;
+	int id, idOrganizacao;
+
+	public Usuario() {
+	}
 
 	public String getNome() {
 		return nome;
@@ -11,14 +14,6 @@ public class Usuario {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public String getSenha() {
@@ -29,11 +24,27 @@ public class Usuario {
 		this.senha = senha;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public int getIdOrganizacao() {
 		return idOrganizacao;
 	}
 
 	public void setIdOrganizacao(int idOrganizacao) {
 		this.idOrganizacao = idOrganizacao;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }

@@ -15,6 +15,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -24,6 +25,7 @@ import java.util.Map;
 
 import br.com.wises.reservadesalarodrigo.R;
 import br.com.wises.reservadesalarodrigo.models.Event;
+import br.com.wises.reservadesalarodrigo.models.Usuario;
 import br.com.wises.reservadesalarodrigo.network.HttpRequest;
 import br.com.wises.reservadesalarodrigo.utils.Constants;
 import br.com.wises.reservadesalarodrigo.utils.TinyDB;
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 	String senha = "";
 	long millis = 0L;
 	TinyDB tinyDB;
+	Usuario usuarioLogado = new Usuario();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 						params.put("authorization", "secret");
 						params.put("email", usuario);
 						params.put("password", senha);
-						String url = "http://172.30.248.56:8080/ReservaDeSala/rest/usuario/login";
+						String url = "usuario/login";
 
 						loginButton.setEnabled(false);
 						calendarLottie.setVisibility(View.GONE);
@@ -121,7 +124,14 @@ public class MainActivity extends AppCompatActivity {
 	public void customEventReceived(Event event) {
 		if (event.getEventName().equals("Login" + Constants.eventSuccessLabel)) {
 //            showToastLogin("Login Sucesso ! Redirecionar para Tela Princial (" + event.getEventMsg() + ")");
-			tinyDB.putString("userEmail", usuario);
+			Gson gson = new Gson();
+			String responseJson = event.getEventMsg();
+			System.out.println(responseJson);
+			usuarioLogado = gson.fromJson(responseJson, Usuario.class);
+
+			tinyDB.putString("userEmail", usuarioLogado.getEmail());
+			tinyDB.putString("id_organizacao", String.valueOf(usuarioLogado.getIdOrganizacao()));
+			tinyDB.putString("id_usuario", String.valueOf(usuarioLogado.getId()));
 			Intent intent = new Intent(getApplicationContext(), MenuBottomNavigation.class);
 			startActivity(intent);
 			finish();
